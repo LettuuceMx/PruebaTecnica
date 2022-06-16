@@ -1,0 +1,153 @@
+﻿@model ModeloMultiple
+
+@{
+    ViewData["Title"] = "Registro Cliente";
+}
+
+<style>
+    .panelAlumno {
+        width: auto;
+        height: auto;
+        background-color: white;
+    }
+
+    .contenedor-inputs {
+        display: flex;
+        justify-content: center;
+    }
+
+    .panelContacto {
+        background-color: white;
+        margin: 0 0 0 3rem;
+    }
+
+    .btnCrear {
+        width: 10%;
+    }
+
+    .contenedor-form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    @@media (max-width: 600px) {
+        .contenedor-inputs {
+            align-items: center;
+            flex-direction: column;
+            margin: 0 0 0 0;
+        }
+
+        .panelContacto {
+            background-color: white;
+            margin: 3rem 0 0 0;
+        }
+    }
+</style>
+
+<div>
+    <form asp-action="CrearCliente" asp-controller="Home" class="contenedor-form">
+
+        <div class="contenedor-inputs">
+            <section class="panelAlumno">
+                <h2>Datos cliente</h2>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelCliente.Nombre" placeholder="Nombre" class="form-control" />
+                    <span asp-validation-for="modelCliente.Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelCliente.ApellidoPaterno" placeholder="Apellido Paterno" class="form-control" />
+                    <span asp-validation-for="modelCliente.ApellidoPaterno" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelCliente.ApellidoMaterno" placeholder="Apellido Materno" class="form-control" />
+                    <span asp-validation-for="modelCliente.ApellidoMaterno" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input asp-for="modelCliente.FechaNacimiento" id="FechaNac" placeholder="Fecha nacimiento" class="form-control" />
+                    @*<input type="date" id="FechaNac" min="1980-01-01" max="2022-12-31" />*@
+                    <span asp-validation-for="modelCliente.FechaNacimiento" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelCliente.Edad" id="edad" placeholder="Edad" class="form-control" />
+                    <span asp-validation-for="modelCliente.Edad" class="text-danger"></span>
+                </div>
+            </section>
+
+            <section class="panelContacto">
+                <h2>Dirección</h2>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelDireccion.Calle" placeholder="Calle" class="form-control" />
+                    <span asp-validation-for="modelDireccion.Calle" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelDireccion.NumeroExterior" placeholder="Numero exterior" class="form-control" />
+                    <span asp-validation-for="modelDireccion.NumeroExterior" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelDireccion.NumeroInterior" placeholder="Numero interior" class="form-control" />
+                    @*<span asp-validation-for="modelDireccion.NumeroExterior" class="text-danger"></span>*@
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelDireccion.Estado" placeholder="Estado" class="form-control" />
+                    <span asp-validation-for="modelDireccion.Estado" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelDireccion.Municipio" placeholder="Municipio" class="form-control" />
+                    <span asp-validation-for="modelDireccion.Municipio" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelDireccion.Colonia" placeholder="Colonia" class="form-control" />
+                    <span asp-validation-for="modelDireccion.Colonia" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" asp-for="modelDireccion.CodigoPostal" placeholder="Codigo postal" class="form-control" />
+                    <span asp-validation-for="modelDireccion.CodigoPostal" class="text-danger"></span>
+                </div>
+            </section>
+        </div>
+
+        <button type="submit" class="btn btnCrear btn-primary m-2">Alta cliente</button>
+
+    </form>
+</div>
+
+<script>
+        const fechaNacimiento = document.getElementById("FechaNac");
+    const edad = document.getElementById("edad");
+
+    const calcularEdad = (fechaNacimiento) => {
+    const fechaActual = new Date();
+    const anoActual = parseInt(fechaActual.getFullYear());
+
+    const anoNacimiento = parseInt(String(fechaNacimiento).substring(0, 4));
+
+    let edad = anoActual - anoNacimiento;
+
+    return edad;
+};
+
+    window.addEventListener('load', function () {
+
+        fechaNacimiento.addEventListener('change', function () {
+            if (this.value) {
+                console.log(this.value);
+                edad.value = calcularEdad(this.value);
+            }
+        });
+
+    });
+
+</script>

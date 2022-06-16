@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ModelClienteDireccion>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Calle</th>
+            <th scope="col">Numero exterior</th>
+            <th scope="col">Numero interior</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Municipio</th>
+            <th scope="col">Colonia</th>
+            <th scope="col">Codigo postal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*foreach de select*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.idCliente</th>
+                <td>@item.Nombre @item.ApellidoPaterno @item.ApellidoMaterno</td>
+                <td>@item.FechaNacimiento.ToString("dd/MMMM/yyyy")</td>
+                <td>@item.Edad</td>
+                <td>@item.Calle</td>
+                <td>@item.NumeroExterior</td>
+                <td>@item.NumeroInterior</td>
+                <td>@item.Estado</td>
+                <td>@item.Municipio</td>
+                <td>@item.Colonia</td>
+                <td>@item.CodigoPostal</td>
+            </tr>
+        }
+    </tbody>
+</table>
